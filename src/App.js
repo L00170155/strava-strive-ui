@@ -1,12 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+
+import Navbar from './Navbar';
+import Home from './Home';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Create from './Create';
 
 function App() {
   return (
-    <div className="App">
-      <div
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/create" element={<Create/>}/>
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
-export default A
+export default App;
