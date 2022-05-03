@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
-const baseURL = "http://localhost:4000/getInfo"
+
+const baseURL = "http://localhost:4000/cat/facts"
 
 
 const Home = () => {
@@ -17,7 +18,8 @@ const Home = () => {
     return ( 
         <div className="home">
             <h2>Homepage</h2>    
-            <p> { post.username } </p>
+            <p> { post } </p>
+      
             <button onClick={stravaData}>StravaData</button>
         </div>
 
