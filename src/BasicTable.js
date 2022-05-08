@@ -17,22 +17,15 @@ const columns = [
     { title: "_id", field: "_id" }
 ];
 
-const baseURL = "http://localhost:4000/cat/facts"
+const baseURL = "http://localhost:4000/api/getdbusers"
 
 
 function BasicTable() {
 
-// export const BasicTable = () => {
     const [data, setData] = useState([]);
-    
+    console.log(data)
     useEffect(()=>{
-        // axios.get(`${baseURL}`)
-        // .then((response) => {
 
-        // setData(response.data);
-           
-        //   });
-        //   console.log('data', data)
         fetch(`${baseURL}`)
         .then(resp=>resp.json())
         .then(resp=>setData(resp))
