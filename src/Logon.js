@@ -1,15 +1,18 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
-const Create = () => {
+const Logon = () => {
 
   const [user, setUser] = useState('');
   const [pass, setPassword] = useState('');
   const [clientId, setClientId] = useState('');
   const [clientSecret, setClientSecret] = useState('');
   const [token, setToken] = useState('');
+  const navigate = useNavigate();
   
+
   const handleSubmit = (e) => {
       e.preventDefault();
       const userID = { user };
@@ -17,26 +20,31 @@ const Create = () => {
       const client = { clientId };
       const clientSec = { clientSecret };
       const clientToken = { token };
-
-      axios.post('http://localhost:4000/api/add', { 
-        userName: userID,
-        password: password,
-        stravaClientId: client,
-        stravaClientSecret: clientSec,
-        stravaToken: clientToken,
-    }) 
-    .then(function (res) {
-        console.log(res);
-        return "good"
+      
+      axios.get('http://localhost:4000/api/getOneUser', {
+        params: {
+          userName: userID,
+          password: password
+        },
+      })
+      .then(res => {
+        const data= res.data
+        console.log(data.password)
+        console.log(pass)
+        if (data.password == pass ) {
+          navigate("/table");
+        } else {
+        navigate("/")
+        }
     })
-    .catch(function (error) {
-        console.log(error);
-    });
+  .catch(err => console.log(err))
+
+      
 
   }
 
     return (
-        <div className="create">
+        <div className="Logon">
             <h2>Add </h2>
             <form onSubmit={handleSubmit}>
                 <label>User</label>
@@ -53,27 +61,6 @@ const Create = () => {
                   value={pass}
                   onChange={(e) => setPassword(e.target.value)} 
                 />
-                <label>Client ID</label>
-                <input 
-                  type="test"
-                  required
-                  value={clientId}
-                  onChange={(e) => setClientId(e.target.value)}
-                />
-                <label>Client Secret</label>
-                <input 
-                  type="test1"
-                  required
-                  value={clientSecret}
-                  onChange={(e) => setClientSecret(e.target.value)} 
-                />
-                <label>Token</label>
-                <input 
-                  type="test"
-                  required
-                  value={token}
-                  onChange={(e) => setToken(e.target.value)}
-                />
                 <button>Add User</button>
             </form>
         </div>
@@ -81,4 +68,4 @@ const Create = () => {
 }
 
 
-export default Create;
+export default Logon;

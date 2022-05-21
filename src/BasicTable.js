@@ -9,7 +9,7 @@ import axios from "axios";
 // ];
 
 const columns = [
-    { title: "Name", field: "name" },
+    { title: "Name", field: "userName" },
     { title: "Date", field: "date" },
     { title: "email", field: "email" },
     { title: "text", field: "text" },
@@ -25,7 +25,6 @@ function BasicTable() {
     const [data, setData] = useState([]);
     console.log(data)
     useEffect(()=>{
-
         fetch(`${baseURL}`)
         .then(resp=>resp.json())
         .then(resp=>setData(resp))

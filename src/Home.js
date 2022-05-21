@@ -1,29 +1,23 @@
-import { useState } from "react";
-import axios from "axios";
-
-
-const baseURL = "http://localhost:4000/cat/facts"
-
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 
-  const [post, setPost] = useState([]);
+  const navigate = useNavigate();
 
-  const stravaData = (e) => {
-    axios.get(`${baseURL}`).then((response) => {
-          setPost(response.data);
-         });
-  }
+    const handleCreate = () => {
+        navigate("/create");
+    }
+    
+    const handleLogon = () => {
+      navigate("/logon");
+    }
 
-    return ( 
-        <div className="home">
-            <h2>Homepage</h2>    
-            <p> { post } </p>
-      
-            <button onClick={stravaData}>StravaData</button>
-        </div>
-
-     );
+    return (
+      <div>
+        <button onClick={handleCreate}>Create User</button>
+        <button onClick={handleLogon}>Logon</button>
+      </div>
+    );
 }
  
 export default Home;
